@@ -12,13 +12,12 @@ source:
   sha256: 0b25dd26d21cf44940c528c3026eec6c6761f21ae53cffe3c3efb19b9ff614a2
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: libmamba
     version: {{ libmamba_version }}
     script: build_mamba.sh                       # [unix]
-    script: build_mamba.bat                      # [win]
     build:
       run_exports:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
@@ -27,22 +26,21 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
-        - cmake
+        - cmake {{cmake}}
         - ninja
       host:
-        - libsolv >=0.7.19
+        - libsolv {{libsolv}}
         - libcurl
         - openssl
         - libarchive
         - nlohmann_json
-        - cpp-filesystem >=1.5.8
-        - reproc-cpp >=14.2.1
+        - cpp-filesystem {{cpp_filesystem}}
+        - reproc-cpp {{reproc_cpp}}
         - spdlog
-        - yaml-cpp
-        - termcolor-cpp
+        - yaml-cpp {{yaml_cpp}}
+        - termcolor-cpp {{termcolor_cpp}}
         - cli11
         - libiconv                               # [unix]
-        - winreg                                 # [win]
     test:
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
@@ -50,11 +48,6 @@ outputs:
         - test -f ${PREFIX}/lib/cmake/libmamba/libmambaConfig.cmake  # [unix]
         - test -f ${PREFIX}/lib/cmake/libmamba/libmambaConfigVersion.cmake  # [unix]
         - test -e ${PREFIX}/lib/libmamba${SHLIB_EXT}  # [unix]
-        - if not exist %LIBRARY_PREFIX%\include\mamba\version.hpp (exit 1)  # [win]
-        - if not exist %LIBRARY_PREFIX%\lib\cmake\libmamba\libmambaConfig.cmake (exit 1)  # [win]
-        - if not exist %LIBRARY_PREFIX%\lib\cmake\libmamba\libmambaConfigVersion.cmake (exit 1)  # [win]
-        - if not exist %LIBRARY_PREFIX%\bin\libmamba.dll (exit 1)  # [win]
-        - if not exist %LIBRARY_PREFIX%\lib\libmamba.lib (exit 1)  # [win]
         {% set libmamba_version_split = libmamba_version.split('.') %}
         - cat $PREFIX/include/mamba/version.hpp | grep "LIBMAMBA_VERSION_MAJOR {{ libmamba_version_split[0] }}"  # [unix]
         - cat $PREFIX/include/mamba/version.hpp | grep "LIBMAMBA_VERSION_MINOR {{ libmamba_version_split[1] }}"  # [unix]
@@ -63,7 +56,6 @@ outputs:
   - name: libmambapy
     version: {{ libmambapy_version }}
     script: build_mamba.sh                       # [unix]
-    script: build_mamba.bat                      # [win]
     build:
       string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       run_exports:
@@ -73,7 +65,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
-        - cmake
+        - cmake {{cmake}}
         - ninja
         - python                                 # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
@@ -85,10 +77,10 @@ outputs:
         - pybind11
         - pybind11-abi
         - openssl
-        - yaml-cpp
+        - yaml-cpp {{yaml_cpp}}
         - spdlog
-        - cpp-filesystem >=1.5.8
-        - termcolor-cpp
+        - cpp-filesystem {{cpp_filesystem}}
+        - termcolor-cpp {{termcolor_cpp}}
         - nlohmann_json
         - {{ pin_subpackage('libmamba', exact=True) }}
       run:
@@ -104,7 +96,6 @@ outputs:
   - name: mamba
     version: {{ mamba_version }}
     script: build_mamba.sh                       # [unix]
-    script: build_mamba.bat                      # [win]
     build:
       string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       entry_points:
@@ -120,7 +111,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda >=4.8
+        - conda 
         - {{ pin_subpackage('libmambapy', exact=True) }}
 
     test:
@@ -153,8 +144,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - adriendelsalle
-    - SylvainCorlay
-    - JohanMabille
-    - wolfv
-    - ericmjl
+    - open-ce/open-ce-dev-team
