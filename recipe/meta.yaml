@@ -22,7 +22,7 @@ outputs:
       run_exports:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
       ignore_run_exports:
-        - spdlog {{spdlog}}
+        - spdlog
     requirements:
       build:
         - {{ compiler('cxx') }}
