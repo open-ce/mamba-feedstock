@@ -20,6 +20,7 @@ if [[ $PKG_NAME == "libmamba" ]]; then
         -GNinja                         \
         -DCMAKE_INSTALL_PREFIX=$PREFIX  \
         -DCMAKE_PREFIX_PATH=$PREFIX     \
+	-DCMAKE_INSTALL_LIBDIR=${PREFIX}/lib \
         -DBUILD_LIBMAMBA=ON             \
         -DBUILD_SHARED=ON               \
         -DBUILD_MAMBA_PACKAGE=ON
