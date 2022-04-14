@@ -12,7 +12,7 @@ source:
   sha256: bde3a7b247590d74e7c5f8f1b5e7abae1511592c9fb9fd0696bf66c85aa8ee2d
 
 build:
-  number: 1
+  number: 2
 
 outputs:
   - name: libmamba
@@ -28,6 +28,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake {{cmake}}
         - ninja {{ninja}}
+        - zlib {{ zlib }}
       host:
         - libsolv {{libsolv}}
         - libcurl
@@ -41,6 +42,7 @@ outputs:
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
         - libiconv {{libiconv}}                              # [unix]
+        - zlib {{ zlib }}
     test:
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
@@ -71,6 +73,7 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - pybind11 {{pybind11}}                              # [build_platform != target_platform]
         - pybind11-abi                           # [build_platform != target_platform]
+        - zlib {{ zlib }}
       host:
         - python
         - pip
@@ -83,6 +86,7 @@ outputs:
         - termcolor-cpp {{termcolor_cpp}}
         - nlohmann_json {{nlohmann_json}}
         - {{ pin_subpackage('libmamba', exact=True) }}
+        - zlib {{ zlib }}
       run:
         - python
         - {{ pin_subpackage('libmamba', exact=True) }}
