@@ -44,6 +44,8 @@ outputs:
         - libiconv {{libiconv}}                              # [unix]
         - zlib {{ zlib }}
     test:
+      requires:
+        - conda 4.12
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
