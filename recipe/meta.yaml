@@ -12,7 +12,7 @@ source:
   sha256: bde3a7b247590d74e7c5f8f1b5e7abae1511592c9fb9fd0696bf66c85aa8ee2d
 
 build:
-  number: 3
+  number: 4
 
 outputs:
   - name: libmamba
@@ -44,6 +44,8 @@ outputs:
         - libiconv {{libiconv}}                              # [unix]
         - zlib {{ zlib }}
     test:
+      requires:
+        - conda 4.12
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
@@ -91,6 +93,8 @@ outputs:
         - python
         - {{ pin_subpackage('libmamba', exact=True) }}
     test:
+      requires:
+        - conda 4.12
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -122,6 +126,7 @@ outputs:
         - mamba
       requires:
         - pip
+        - conda 4.12
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
