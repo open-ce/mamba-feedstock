@@ -1,18 +1,20 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "0.22.1" %}
-{% set libmambapy_version = "0.22.1" %}
-{% set mamba_version = "0.22.1" %}
-{% set release = "2022.02.28" %}
+{% set libmamba_version = "0.24.0" %}
+{% set libmambapy_version = "0.24.0" %}
+{% set mamba_version = "0.24.0" %}
+{% set release = "2022.05.31" %}
 
 package:
   name: mamba-split
 
 source:
   url: https://github.com/mamba-org/mamba/archive/refs/tags/{{ release }}.tar.gz
-  sha256: bde3a7b247590d74e7c5f8f1b5e7abae1511592c9fb9fd0696bf66c85aa8ee2d
+  sha256: 7c63fcd10371dca78e2715826fb6c18e35f51d947faf40a728854dabfb4caab8
 
 build:
-  number: 4
+  number: 1
+  patches:
+    - fix_build_issues.patch
 
 outputs:
   - name: libmamba
@@ -36,6 +38,7 @@ outputs:
         - libarchive
         - nlohmann_json {{nlohmann_json}}
         - cpp-filesystem {{cpp_filesystem}}
+        - cpp-expected
         - reproc-cpp {{reproc_cpp}}
         - spdlog {{spdlog}}
         - yaml-cpp {{yaml_cpp}}
@@ -85,6 +88,7 @@ outputs:
         - yaml-cpp {{yaml_cpp}}
         - spdlog {{spdlog}}
         - cpp-filesystem {{cpp_filesystem}}
+        - cpp-expected
         - termcolor-cpp {{termcolor_cpp}}
         - nlohmann_json {{nlohmann_json}}
         - {{ pin_subpackage('libmamba', exact=True) }}
