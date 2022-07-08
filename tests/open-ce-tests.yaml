@@ -1,0 +1,15 @@
+tests:
+  - name: Setup Mamba Tests
+    command: |
+        conda install -y git
+        git clone --recursive -b v$(python -c "import mamba; print(mamba.__version__)") https://github.com/mamba-org/mamba.git
+        conda install -y pytest
+  #- name: Run mamba Python tests
+    #command: |
+        #cd mamba
+        #PYTHON_VER=$(python -c 'import platform; print(platform.python_version())')
+        #SKIPPED_TESTS="not test_cli and not test_plotting and not test_sklearn_plotting"
+        #pytest -v -k "${SKIPPED_TESTS}" tests/python
+        #pytest -v -k tests/python
+  - name: Clean tests
+    command: rm -rf mamba
