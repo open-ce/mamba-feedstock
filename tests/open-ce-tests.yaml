@@ -2,14 +2,13 @@ tests:
   - name: Setup Mamba Tests
     command: |
         conda install -y git
-        git clone https://github.com/mamba-org/mamba.git
+        git clone --recursive -b $(python -c "import mamba; print('micromamba-'+ mamba.__version__)") https://github.com/mamba-org/mamba.git
         cd mamba/mamba
-        git checkout 2022.07.26
         conda install -y pyyaml pytest
   - name: Run mamba tests
     command: |
         cd mamba/mamba
-        SKIPPED_TESTS="not test_install and not test_create_files and not test_multi_channels"
+        SKIPPED_TESTS="not test_install and not test_create_files and not test_unicode"
         pytest -v -k "${SKIPPED_TESTS}" tests/
   - name: Clean tests
     command: |
