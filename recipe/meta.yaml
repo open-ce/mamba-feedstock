@@ -10,8 +10,6 @@ package:
 source:
   url: https://github.com/mamba-org/mamba/archive/refs/tags/{{ release }}.tar.gz
   sha256: b61cfa51b08a7a2c11fa7352f223263ad3037d613dd6bb32144785cd9643d74c
-  patches:
-    - out.patch
 
 build:
   number: 2
