@@ -50,7 +50,7 @@ outputs:
         - zlib {{ zlib }}
     test:
       requires:
-        - conda 4.12
+        - conda
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
@@ -100,7 +100,7 @@ outputs:
         - {{ pin_subpackage('libmamba', exact=True) }}
     test:
       requires:
-        - conda 4.12
+        - conda
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -125,14 +125,14 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda 4.12
+        - conda
         - {{ pin_subpackage('libmambapy', exact=True) }}
     test:
       imports:
         - mamba
       requires:
         - pip
-        - conda 4.12
+        - conda
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
