@@ -12,7 +12,7 @@ source:
   sha256: b61cfa51b08a7a2c11fa7352f223263ad3037d613dd6bb32144785cd9643d74c
 
 build:
-  number: 1
+  number: 2
   patches:
     - fix_build_issues.patch
 
@@ -24,7 +24,7 @@ outputs:
       run_exports:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
       ignore_run_exports:
-        - spdlog
+        - spdlog-fmt-embed
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -40,7 +40,7 @@ outputs:
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - reproc-cpp {{reproc_cpp}}
-        - spdlog {{spdlog}}
+        - spdlog-fmt-embed {{ spdlog }}
         - yaml-cpp {{yaml_cpp}}
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
@@ -48,7 +48,7 @@ outputs:
         - zlib {{ zlib }}
     test:
       requires:
-        - conda 4.12
+        - conda
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
@@ -68,7 +68,7 @@ outputs:
       run_exports:
         - {{ pin_subpackage('libmambapy', max_pin='x.x') }}
       ignore_run_exports:
-        - spdlog {{spdlog}}
+        - spdlog-fmt-embed {{spdlog}}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -86,7 +86,7 @@ outputs:
         - pybind11-abi
         - openssl
         - yaml-cpp {{yaml_cpp}}
-        - spdlog {{spdlog}}
+        - spdlog-fmt-embed {{spdlog}}
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - termcolor-cpp {{termcolor_cpp}}
@@ -98,7 +98,7 @@ outputs:
         - {{ pin_subpackage('libmamba', exact=True) }}
     test:
       requires:
-        - conda 4.12
+        - conda
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -123,14 +123,14 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda 4.12
+        - conda
         - {{ pin_subpackage('libmambapy', exact=True) }}
     test:
       imports:
         - mamba
       requires:
         - pip
-        - conda 4.12
+        - conda
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
