@@ -1,0 +1,5 @@
+cxx_compiler_version:
+  - 11.*                      # [cudatoolkit == '11.2']
+cxx_compiler_version:
+  - 11.*                      # [cudatoolkit == '11.2']
+
