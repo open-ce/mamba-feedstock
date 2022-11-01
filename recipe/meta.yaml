@@ -85,6 +85,7 @@ outputs:
         - pybind11 {{pybind11}}
         - pybind11-abi
         - openssl
+        - libsolv {{ libsolv }}
         - yaml-cpp {{yaml_cpp}}
         - spdlog-fmt-embed {{spdlog}}
         - cpp-filesystem {{cpp_filesystem}}
