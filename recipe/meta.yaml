@@ -49,6 +49,7 @@ outputs:
     test:
       requires:
         - conda
+        - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
@@ -100,6 +101,7 @@ outputs:
     test:
       requires:
         - conda
+        - libsolv {{ libsolv }}
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -132,6 +134,7 @@ outputs:
       requires:
         - pip
         - conda
+        - libsolv {{ libsolv }}
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
