@@ -1,0 +1,26 @@
+From 23355ce3870f3697df72688c0504fc086bcb37a0 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 3 Nov 2022 09:18:43 -0400
+Subject: [PATCH] Add find package for fmt
+
+---
+ libmambapy/CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/libmambapy/CMakeLists.txt b/libmambapy/CMakeLists.txt
+index b7f7c9d..d743dd6 100644
+--- a/libmambapy/CMakeLists.txt
++++ b/libmambapy/CMakeLists.txt
+@@ -11,6 +11,9 @@ cmake_policy(SET CMP0057 NEW)
+ 
+ project(libmambapy)
+ 
++find_package(fmt REQUIRED)
++find_package(spdlog REQUIRED)
++
+ if(NOT TARGET libmamba)
+     find_package(libmamba REQUIRED)
+ endif ()
+-- 
+2.23.0
+
