@@ -1,20 +1,20 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "0.27.0" %}
-{% set libmambapy_version = "0.27.0" %}
-{% set mamba_version = "0.27.0" %}
-{% set release = "2022.10.04" %}
+{% set libmamba_version = "1.0.0" %}
+{% set libmambapy_version = "1.0.0" %}
+{% set mamba_version = "1.0.0" %}
+{% set release = "2022.11.01" %}
 
 package:
   name: mamba-split
 
 source:
-  url: https://github.com/mamba-org/mamba/archive/refs/tags/{{ release }}.tar.gz
-  sha256: d4d4fbcfdb05794bb80ec87d9e61eb493b1827a78227b137684add2b9792f01e
+  git_url: https://github.com/mamba-org/mamba
+  git_rev: mamba-{{ mamba_version }}
+  patches:
+    - 0001-Add-find-package-for-fmt.patch
 
 build:
-  number: 4
-  patches:
-    - fix_build_issues.patch
+  number: 1
 
 outputs:
   - name: libmamba
@@ -42,6 +42,7 @@ outputs:
         - cpp-expected
         - reproc-cpp {{reproc_cpp}}
         - spdlog-fmt-embed {{ spdlog }}
+        - fmt
         - yaml-cpp {{yaml_cpp}}
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
@@ -52,6 +53,7 @@ outputs:
     test:
       requires:
         - conda
+        - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
@@ -89,6 +91,7 @@ outputs:
         - pybind11 {{pybind11}}
         - pybind11-abi
         - openssl
+        - fmt
         - libsolv {{ libsolv }}
         - yaml-cpp {{yaml_cpp}}
         - spdlog-fmt-embed {{spdlog}}
@@ -100,6 +103,7 @@ outputs:
         - zlib {{ zlib }}
       run:
         - python
+        - libsolv {{ libsolv }}
         - {{ pin_subpackage('libmamba', exact=True) }}
         - libsolv {{ libsolv }}
     test:
