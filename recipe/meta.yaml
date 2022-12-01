@@ -105,10 +105,10 @@ outputs:
         - python
         - libsolv {{ libsolv }}
         - {{ pin_subpackage('libmamba', exact=True) }}
+        - libsolv {{ libsolv }}
     test:
       requires:
         - conda
-        - libsolv {{ libsolv }}
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -135,13 +135,13 @@ outputs:
         - python
         - conda
         - {{ pin_subpackage('libmambapy', exact=True) }}
+        - libsolv {{ libsolv }}
     test:
       imports:
         - mamba
       requires:
         - pip
         - conda
-        - libsolv {{ libsolv }}
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
