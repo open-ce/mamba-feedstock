@@ -25,7 +25,7 @@ outputs:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
         - libsolv {{ libsolv }}
       ignore_run_exports:
-        - spdlog
+        - spdlog {{ spdlog }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -41,8 +41,8 @@ outputs:
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - reproc-cpp {{reproc_cpp}}
-        - spdlog
-        - fmt
+        - spdlog {{ spdlog }}
+        - fmt {{ fmt }}
         - yaml-cpp {{yaml_cpp}}
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
@@ -74,7 +74,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', max_pin='x.x') }}
         - libsolv {{ libsolv }}
       ignore_run_exports:
-        - spdlog
+        - spdlog {{ spdlog }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -91,10 +91,10 @@ outputs:
         - pybind11 {{pybind11}}
         - pybind11-abi
         - openssl
-        - fmt
+        - fmt {{ fmt }}
         - libsolv {{ libsolv }}
         - yaml-cpp {{yaml_cpp}}
-        - spdlog
+        - spdlog {{ spdlog }}
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - termcolor-cpp {{termcolor_cpp}}
