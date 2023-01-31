@@ -1,8 +1,8 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "1.0.0" %}
-{% set libmambapy_version = "1.0.0" %}
-{% set mamba_version = "1.0.0" %}
-{% set release = "2022.11.01" %}
+{% set libmamba_version = "1.1.0" %}
+{% set libmambapy_version = "1.1.0" %}
+{% set mamba_version = "1.1.0" %}
+{% set release = "2022.11.25" %}
 
 package:
   name: mamba-split
@@ -25,7 +25,7 @@ outputs:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
         - libsolv {{ libsolv }}
       ignore_run_exports:
-        - spdlog-fmt-embed
+        - spdlog {{ spdlog }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -41,8 +41,8 @@ outputs:
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - reproc-cpp {{reproc_cpp}}
-        - spdlog-fmt-embed {{ spdlog }}
-        - fmt
+        - spdlog {{ spdlog }}
+        - fmt {{ fmt }}
         - yaml-cpp {{yaml_cpp}}
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
@@ -74,7 +74,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', max_pin='x.x') }}
         - libsolv {{ libsolv }}
       ignore_run_exports:
-        - spdlog-fmt-embed {{spdlog}}
+        - spdlog {{ spdlog }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -91,10 +91,10 @@ outputs:
         - pybind11 {{pybind11}}
         - pybind11-abi
         - openssl
-        - fmt
+        - fmt {{ fmt }}
         - libsolv {{ libsolv }}
         - yaml-cpp {{yaml_cpp}}
-        - spdlog-fmt-embed {{spdlog}}
+        - spdlog {{ spdlog }}
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - termcolor-cpp {{termcolor_cpp}}
