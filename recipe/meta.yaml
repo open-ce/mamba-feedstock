@@ -11,6 +11,8 @@ package:
 source:
   git_url: https://github.com/mamba-org/mamba
   git_rev: mamba-{{ mamba_version }}
+  patches:
+    - 0001-Fix-for-mamba-seg-fault.patch
 
 build:
   number: 1

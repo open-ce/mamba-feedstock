@@ -1,0 +1,44 @@
+From 0b80f87f565abbfdc765569cd045ab49601b8115 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Tue, 4 Apr 2023 22:47:15 -0700
+Subject: [PATCH] Fix for mamba seg fault
+
+---
+ libmamba/src/core/url.cpp | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/libmamba/src/core/url.cpp b/libmamba/src/core/url.cpp
+index 8c1ad222..81c15cdd 100644
+--- a/libmamba/src/core/url.cpp
++++ b/libmamba/src/core/url.cpp
+@@ -161,16 +161,20 @@ namespace mamba
+             u = u.substr(0, u.size() - 13);
+         }
+ 
+-        unsigned char hash[16];
+-
+-        EVP_MD_CTX* mdctx;
+-        mdctx = EVP_MD_CTX_create();
+-        EVP_DigestInit_ex(mdctx, EVP_md5(), nullptr);
++        const EVP_MD* type = EVP_md5();
++        unsigned char hash[EVP_MAX_MD_SIZE];
++        if (FIPS_mode())
++        {
++            type = EVP_sha256();
++        }
++        unsigned int mdLen = 0;
++        EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
++        EVP_DigestInit_ex(mdctx, type, nullptr);
+         EVP_DigestUpdate(mdctx, u.c_str(), u.size());
+-        EVP_DigestFinal_ex(mdctx, hash, nullptr);
++        EVP_DigestFinal_ex(mdctx, hash, &mdLen);
+         EVP_MD_CTX_destroy(mdctx);
+ 
+-        std::string hex_digest = hex_string(hash, 16);
++        std::string hex_digest = hex_string(hash, mdLen);
+         return hex_digest.substr(0u, 8u);
+     }
+ 
+-- 
+2.31.1
+
