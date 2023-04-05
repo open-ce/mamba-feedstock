@@ -22,7 +22,7 @@ index 8c1ad222..81c15cdd 100644
 -        EVP_DigestInit_ex(mdctx, EVP_md5(), nullptr);
 +        const EVP_MD* type = EVP_md5();
 +        unsigned char hash[EVP_MAX_MD_SIZE];
-+        if (FIPS_mode() || FIPS_mode_set(1))
++        if (FIPS_mode())
 +        {
 +            type = EVP_sha256();
 +        }
