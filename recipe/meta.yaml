@@ -1,20 +1,21 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "0.27.0" %}
-{% set libmambapy_version = "0.27.0" %}
-{% set mamba_version = "0.27.0" %}
-{% set release = "2022.10.04" %}
+{% set libmamba_version = "1.4.1" %}
+{% set libmambapy_version = "1.4.1" %}
+{% set mamba_version = "1.4.1" %}
+{% set release = "2023.03.28" %}
+
 
 package:
   name: mamba-split
 
 source:
-  url: https://github.com/mamba-org/mamba/archive/refs/tags/{{ release }}.tar.gz
-  sha256: d4d4fbcfdb05794bb80ec87d9e61eb493b1827a78227b137684add2b9792f01e
+  git_url: https://github.com/mamba-org/mamba
+  git_rev: mamba-{{ mamba_version }}
+  patches:
+    - 0001-Fix-for-mamba-seg-fault.patch
 
 build:
-  number: 5
-  patches:
-    - fix_build_issues.patch
+  number: 1
 
 outputs:
   - name: libmamba
@@ -25,7 +26,7 @@ outputs:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
         - libsolv {{ libsolv }}
       ignore_run_exports:
-        - spdlog-fmt-embed
+        - spdlog {{ spdlog }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -36,12 +37,13 @@ outputs:
         - libsolv {{libsolv}}
         - libcurl
         - openssl
-        - libarchive
+        - libarchive 
         - nlohmann_json {{nlohmann_json}}
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - reproc-cpp {{reproc_cpp}}
-        - spdlog-fmt-embed {{ spdlog }}
+        - spdlog {{ spdlog }}
+        - fmt {{ fmt }}
         - yaml-cpp {{yaml_cpp}}
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
@@ -52,6 +54,7 @@ outputs:
     test:
       requires:
         - conda
+        - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
         - test -f ${PREFIX}/include/mamba/version.hpp  # [unix]
@@ -72,7 +75,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', max_pin='x.x') }}
         - libsolv {{ libsolv }}
       ignore_run_exports:
-        - spdlog-fmt-embed {{spdlog}}
+        - spdlog {{ spdlog }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -89,9 +92,10 @@ outputs:
         - pybind11 {{pybind11}}
         - pybind11-abi
         - openssl
+        - fmt {{ fmt }}
         - libsolv {{ libsolv }}
         - yaml-cpp {{yaml_cpp}}
-        - spdlog-fmt-embed {{spdlog}}
+        - spdlog {{ spdlog }}
         - cpp-filesystem {{cpp_filesystem}}
         - cpp-expected
         - termcolor-cpp {{termcolor_cpp}}
@@ -100,6 +104,7 @@ outputs:
         - zlib {{ zlib }}
       run:
         - python
+        - libsolv {{ libsolv }}
         - {{ pin_subpackage('libmamba', exact=True) }}
         - libsolv {{ libsolv }}
     test:
