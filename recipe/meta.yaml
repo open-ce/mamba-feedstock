@@ -1,8 +1,8 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "1.4.1" %}
-{% set libmambapy_version = "1.4.1" %}
-{% set mamba_version = "1.4.1" %}
-{% set release = "2023.03.28" %}
+{% set libmamba_version = "1.4.4" %}
+{% set libmambapy_version = "1.4.4" %}
+{% set mamba_version = "1.4.4" %}
+{% set release = "2023.05.16" %}
 
 
 package:
