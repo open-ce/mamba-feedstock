@@ -4,7 +4,6 @@
 {% set mamba_version = "1.4.2" %}
 {% set release = "2023.04.06" %}
 
-
 package:
   name: mamba-split
 
