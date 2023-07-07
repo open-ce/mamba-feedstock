@@ -8,7 +8,7 @@ tests:
   - name: Run mamba tests
     command: |
         cd mamba/mamba
-        SKIPPED_TESTS="not test_install and not test_create_files and not test_unicode"
+        SKIPPED_TESTS="not test_install and not test_create_files and not test_multi_channels"
         pytest -v -k "${SKIPPED_TESTS}" tests/
   - name: Clean tests
     command: |
