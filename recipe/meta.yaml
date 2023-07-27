@@ -1,7 +1,7 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "1.4.2" %}
-{% set libmambapy_version = "1.4.2" %}
-{% set mamba_version = "1.4.2" %}
+{% set libmamba_version = "1.4.9" %}
+{% set libmambapy_version = "1.4.9" %}
+{% set mamba_version = "1.4.9" %}
 
 package:
   name: mamba-split
