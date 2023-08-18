@@ -20,6 +20,7 @@ outputs:
     version: {{ libmamba_version }}
     script: build_mamba.sh                       # [unix]
     build:
+      string: opence_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       run_exports:
         - {{ pin_subpackage('libmamba', max_pin='x.x') }}
         - libsolv {{ libsolv }}
@@ -68,7 +69,7 @@ outputs:
     version: {{ libmambapy_version }}
     script: build_mamba.sh                       # [unix]
     build:
-      string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      string: opence_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       run_exports:
         - {{ pin_subpackage('libmambapy', max_pin='x.x') }}
         - libsolv {{ libsolv }}
@@ -118,7 +119,7 @@ outputs:
     version: {{ mamba_version }}
     script: build_mamba.sh                       # [unix]
     build:
-      string: py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      string: opence_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       entry_points:
         - mamba = mamba.mamba:main
     requirements:
