@@ -4,7 +4,6 @@
 {% set mamba_version = "1.4.1" %}
 {% set release = "2023.03.28" %}
 
-
 package:
   name: mamba-split
 
@@ -15,7 +14,7 @@ source:
     - 0001-Fix-for-mamba-seg-fault.patch
 
 build:
-  number: 1
+  number: 3
 
 outputs:
   - name: libmamba
@@ -33,9 +32,10 @@ outputs:
         - cmake {{cmake}}
         - ninja {{ninja}}
         - zlib {{ zlib }}
+        - libcurl 7.88.1
       host:
         - libsolv {{libsolv}}
-        - libcurl
+        - libcurl 7.88.1
         - openssl
         - libarchive 
         - nlohmann_json {{nlohmann_json}}
