@@ -12,10 +12,9 @@ source:
   git_rev: mamba-{{ mamba_version }}
   patches:
     - 0001-Fix-for-mamba-seg-fault.patch
-    - 0001-compatibility-fixes-for-conda-23.9.patch
 
 build:
-  number: 3
+  number: 2
 
 outputs:
   - name: libmamba
@@ -54,7 +53,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda
+        - conda<23.7.4
         - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
@@ -110,7 +109,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda
+        - conda<23.7.4 
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -143,7 +142,7 @@ outputs:
         - mamba
       requires:
         - pip
-        - conda
+        - conda<23.7.4
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
