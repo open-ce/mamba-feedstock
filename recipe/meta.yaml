@@ -12,9 +12,10 @@ source:
   git_rev: mamba-{{ mamba_version }}
   patches:
     - 0001-Fix-for-mamba-seg-fault.patch
+    - 0001-compatibility-fixes-for-conda-23.9.patch
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - name: libmamba
