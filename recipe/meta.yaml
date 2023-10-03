@@ -134,7 +134,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda
+        - conda<23.7.4
         - {{ pin_subpackage('libmambapy', exact=True) }}
         - libsolv {{ libsolv }}
     test:
