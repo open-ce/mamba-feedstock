@@ -10,8 +10,9 @@ package:
 source:
   git_url: https://github.com/mamba-org/mamba
   git_rev: mamba-{{ mamba_version }}
-  patches:
-    - 0001-Fix-for-mamba-seg-fault.patch
+# disabling fips for s390x because s390x does not support FIPS.
+  patches:                                           #[not s390x]
+    - 0001-Fix-for-mamba-seg-fault.patch             #[not s390x]
 
 build:
   number: 2
