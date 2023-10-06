@@ -9,8 +9,9 @@ package:
 source:
   git_url: https://github.com/mamba-org/mamba
   git_rev: mamba-{{ mamba_version }}
-  patches:
-    - 0001-Fix-for-mamba-seg-fault.patch
+  # disabling fips for s390x because s390x does not support FIPS.
+  patches:                                     #[not s390x]
+    - 0001-Fix-for-mamba-seg-fault.patch       #[not s390x]
 
 build:
   number: 1
@@ -51,7 +52,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda
+        - conda<23.7.4
         - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
@@ -107,7 +108,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda
+        - conda<23.7.4
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -132,7 +133,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda
+        - conda<23.7.4
         - {{ pin_subpackage('libmambapy', exact=True) }}
         - libsolv {{ libsolv }}
     test:
@@ -140,7 +141,7 @@ outputs:
         - mamba
       requires:
         - pip
-        - conda
+        - conda<23.7.4
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
