@@ -15,7 +15,7 @@ source:
     - 0001-Fix-for-mamba-seg-fault.patch             #[not s390x]
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - name: libmamba
