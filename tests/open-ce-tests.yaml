@@ -4,7 +4,7 @@ tests:
         conda install -y git
         git clone --recursive -b $(python -c "import mamba; print('micromamba-'+ mamba.__version__)") https://github.com/mamba-org/mamba.git
         cd mamba/mamba
-        conda install -y pyyaml pytest
+        conda install -y pyyaml pytest urllib3=1.25.11
   - name: Run mamba tests
     command: |
         cd mamba/mamba
