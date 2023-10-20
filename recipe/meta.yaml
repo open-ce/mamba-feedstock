@@ -1,7 +1,7 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "1.4.9" %}
-{% set libmambapy_version = "1.4.9" %}
-{% set mamba_version = "1.4.9" %}
+{% set libmamba_version = "1.5.1" %}
+{% set libmambapy_version = "1.5.1" %}
+{% set mamba_version = "1.5.1" %}
 
 package:
   name: mamba-split
@@ -133,7 +133,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda
+        - conda<23.9.0
         - {{ pin_subpackage('libmambapy', exact=True) }}
         - libsolv {{ libsolv }}
     test:
@@ -141,7 +141,7 @@ outputs:
         - mamba
       requires:
         - pip
-        - conda
+        - conda<23.9.0
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
