@@ -32,7 +32,7 @@ index b1f201a7..8af42b3d 100644
 +        unsigned char hash[EVP_MAX_MD_SIZE];
 +        OSSL_PROVIDER *fips;
 +        fips = OSSL_PROVIDER_load(NULL, "fips");
-+            if (fips != NULL) 
++            if (fips != NULL)
 +            {
 +                type = EVP_sha256();
 +            }
