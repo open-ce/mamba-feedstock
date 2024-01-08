@@ -1,7 +1,7 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "1.4.9" %}
-{% set libmambapy_version = "1.4.9" %}
-{% set mamba_version = "1.4.9" %}
+{% set libmamba_version = "1.5.5" %}
+{% set libmambapy_version = "1.5.5" %}
+{% set mamba_version = "1.5.5" %}
 
 package:
   name: mamba-split
@@ -13,7 +13,7 @@ source:
     - 0001-Fix-for-mamba-seg-fault.patch
 
 build:
-  number: 2
+  number: 1
 
 outputs:
   - name: libmamba
@@ -52,7 +52,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda<23.7.4
+        - conda
         - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
@@ -108,7 +108,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda<23.7.4
+        - conda
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -133,7 +133,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda<23.7.4
+        - conda
         - {{ pin_subpackage('libmambapy', exact=True) }}
         - libsolv {{ libsolv }}
     test:
@@ -141,7 +141,7 @@ outputs:
         - mamba
       requires:
         - pip
-        - conda<23.7.4
+        - conda
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
