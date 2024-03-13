@@ -1,5 +1,5 @@
 From c92d16ddb592d5637ee0482468535fe328abfda4 Mon Sep 17 00:00:00 2001
-From: Aman-Surkar <aman_surkar@persistent.com>
+From: Aman Surkar <Aman.Surkar@ibm.com>
 Date: Mon, 8 Jan 2024 11:38:46 +0000
 Subject: [PATCH] Fix-for-mamba-seg-fault
 
