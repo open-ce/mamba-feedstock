@@ -1,7 +1,7 @@
 {% set name = "mamba" %}
-{% set libmamba_version = "1.5.6" %}
-{% set libmambapy_version = "1.5.6" %}
-{% set mamba_version = "1.5.6" %}
+{% set libmamba_version = "1.5.7" %}
+{% set libmambapy_version = "1.5.7" %}
+{% set mamba_version = "1.5.7" %}
 
 package:
   name: mamba-split
@@ -11,7 +11,7 @@ source:
   git_rev: mamba-{{ mamba_version }}
 
 build:
-  number: 2
+  number: 1
 
 outputs:
   - name: libmamba
