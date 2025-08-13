@@ -11,7 +11,7 @@ source:
   git_rev: mamba-{{ mamba_version }}
 
 build:
-  number: 2
+  number: 3
   
 
 outputs:
@@ -30,7 +30,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake {{cmake}}
         - ninja {{ninja}}
-        - zlib {{ zlib }}
+        - zlib
       host:
         - libsolv {{libsolv}}
         - libcurl
@@ -46,7 +46,7 @@ outputs:
         - termcolor-cpp {{termcolor_cpp}}
         - cli11 {{cli11}}
         - libiconv {{libiconv}}                              # [unix]
-        - zlib {{ zlib }}
+        - zlib
       run:
         - libsolv {{ libsolv }}
     test:
@@ -83,7 +83,7 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - pybind11 {{pybind11}}                              # [build_platform != target_platform]
         - pybind11-abi                           # [build_platform != target_platform]
-        - zlib {{ zlib }}
+        - zlib
       host:
         - python
         - pip
@@ -99,7 +99,7 @@ outputs:
         - termcolor-cpp {{termcolor_cpp}}
         - nlohmann_json {{nlohmann_json}}
         - {{ pin_subpackage('libmamba', exact=True) }}
-        - zlib {{ zlib }}
+        - zlib
       run:
         - python
         - libsolv {{ libsolv }}
