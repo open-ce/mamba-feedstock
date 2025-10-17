@@ -11,7 +11,7 @@ source:
   git_rev: mamba-{{ mamba_version }}
 
 build:
-  number: 3
+  number: 4
   
 
 outputs:
@@ -51,7 +51,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda <23.7.4
+        - conda
         - libsolv {{ libsolv }}
       commands:
         - test -d ${PREFIX}/include/mamba  # [unix]
@@ -107,7 +107,7 @@ outputs:
         - libsolv {{ libsolv }}
     test:
       requires:
-        - conda <23.7.4
+        - conda
       imports:
         - libmambapy
         - libmambapy.bindings
@@ -132,7 +132,7 @@ outputs:
         - {{ pin_subpackage('libmambapy', exact=True) }}
       run:
         - python
-        - conda <23.7.4
+        - conda
         - {{ pin_subpackage('libmambapy', exact=True) }}
         - libsolv {{ libsolv }}
     test:
@@ -140,7 +140,7 @@ outputs:
         - mamba
       requires:
         - pip
-        - conda <23.7.4
+        - conda
       commands:
         - mamba --help
         - test -f ${PREFIX}/etc/profile.d/mamba.sh  # [linux]
